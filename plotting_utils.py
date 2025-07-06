@@ -8,10 +8,12 @@ import re
 import os 
 import warnings
 
+
 """
     Author: Adam Forte
     
     TODO:
+        1. add alternative (shorter) labelling for histograms with too many bins
         1. add validation in plot generation functions for feature_list param
 
 """
@@ -35,7 +37,7 @@ def _goodImageFileNamify(filename:(str|None))->str|None:
     filename = re.sub(r'[<>:"/\\|?*]', "_", filename)
     return f'{path}/{filename}'
 
-def _validatePlotLabels(labels:list[str]|list[tuple[str]], feature_list:list[str]) ->list[str]:
+def _validatePlotLabels(labels:list[str]|list[tuple[str]], feature_list:list[str]|list[tuple[str]]) ->list[str] | list[tuple[str]]:
     if labels != None and len(feature_list) < len(labels):
         raise ValueError("If you provide custom labels, there must be at least as many features in your feature list. ")
     elif labels != None and len(feature_list) > len(labels):
